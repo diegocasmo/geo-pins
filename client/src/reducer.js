@@ -59,6 +59,12 @@ export default function reducer(state, { type, payload }) {
         pins: state.pins.filter(p => p._id !== payload._id),
         currentPin: null
       }
+    case 'CREATE_COMMENT':
+      return {
+        ...state,
+        pins: state.pins.map(p => p._id === payload._id ? payload : p),
+        currentPin: payload
+      }
 
     default:
       return state
