@@ -44,6 +44,13 @@ const Map = ({ classes }) => {
 
   const [popup, setPopup] = useState(null)
 
+  useEffect(() => {
+    const pinExists = popup && state.pins.findIndex(p => p._id === popup._id) >= 0
+    if (!pinExists) {
+      setPopup(null)
+    }
+  }, [state.pins.length])
+
   const getUserPosition = () => {
     if('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(position => {
